@@ -1,2 +1,2 @@
-# react-to-do-list
+# react-js-to-do-list
 An application for notating tasks.
