@@ -28,6 +28,11 @@ const AddTask: FC<Props> = ({ addTaskItem }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [value]);
 
+  const onKeyEnter = useCallback(
+    ({ key }) => onKeyDown(updateTasksList, key),
+    [updateTasksList]
+  );
+
   return (
     <div className="flex items-center max-w-2xl w-full mx-auto bg-slate-500 mt-5 p-4 rounded-2xl">
       <Input
@@ -35,7 +40,7 @@ const AddTask: FC<Props> = ({ addTaskItem }) => {
         value={value}
         className="text-3xl"
         setValue={setValue}
-        onKeyDown={({ key }) => onKeyDown(updateTasksList, key)}
+        onKeyDown={onKeyEnter}
       />
       <Button
         className="bg-white rounded-full active:bg-gray-300"
