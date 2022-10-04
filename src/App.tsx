@@ -8,6 +8,7 @@ import { TaskItemType } from "./types/types";
 export const AppContext = createContext(null);
 
 const TO_DO_LIST_ITEMS_KEY = "TO_DO_LIST_ITEMS";
+
 const TO_DO_LIST_ITEMS = JSON.parse(localStorage.getItem(TO_DO_LIST_ITEMS_KEY));
 
 function App() {

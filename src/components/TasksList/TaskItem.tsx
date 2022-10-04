@@ -41,10 +41,9 @@ export const TaskItem: FC<TaskItemType> = ({ id, description, isDone }) => {
 
   return (
     <>
-      <time
-        dateTime={dateTime}
-        className="w-full ml-5 text-xl font-bold"
-      >{`${DESCRIPTION_TEXT_DATE} ${dateTime}`}</time>
+      <time dateTime={dateTime} className="w-full ml-5 text-xl font-bold">
+        {`${DESCRIPTION_TEXT_DATE} ${dateTime}`}
+      </time>
       <div className="flex items-center w-full bg-input-bg-task my-2 p-4 rounded-2xl">
         <Button className="mr-3" onClick={toogleIsDone}>
           <Check width={CHECK_ICON_SIZE} height={CHECK_ICON_SIZE} />

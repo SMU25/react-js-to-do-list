@@ -3,8 +3,8 @@ import cn from "classnames";
 
 interface Props {
   className?: string;
-  onClick?: VoidFunction;
-  children?: ReactNode | string;
+  onClick: VoidFunction;
+  children: ReactNode | string;
   isDisabled?: boolean;
 }
 

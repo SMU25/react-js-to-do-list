@@ -6,7 +6,8 @@ interface Props extends Pick<TaskItemType, "isDone"> {
   className?: string;
   labelText?: string;
   value: string;
-  setValue?: (value) => void;
+  setValue: (value) => void;
+  isDone?: boolean;
   onBlur?: VoidFunction;
   onKeyDown?: VoidFunction | VoidFunctionWithValue;
 }
@@ -15,8 +16,8 @@ const Input: FC<Props> = ({
   className,
   labelText,
   value,
-  isDone,
   setValue,
+  isDone,
   onBlur,
   onKeyDown,
   ...props
