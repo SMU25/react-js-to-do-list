@@ -1,4 +1,5 @@
-import React, { useState, useCallback, FC } from "react";
+import React, { useState, useCallback, useContext, FC } from "react";
+import { AppContext } from "src/App";
 import Input from "src/components/Input";
 import Button from "src/components/Button";
 import { TaskItemType } from "src/types/types";
@@ -9,7 +10,9 @@ import { ReactComponent as Trash } from "src/assets/trash.svg";
 const CHECK_ICON_SIZE = 40;
 const TRASH_ICON_SIZE = 30;
 
-export const TaskItem: FC<TaskItemType> = ({ description, isDone }) => {
+export const TaskItem: FC<TaskItemType> = ({ id, description, isDone }) => {
+  const deleteTaskItem = useContext(AppContext);
+
   const [isDoneTask, setIsDoneTask] = useState(isDone);
   const toogleIsDone = useCallback(() => {
     setIsDoneTask((prev) => !prev);
@@ -26,7 +29,7 @@ export const TaskItem: FC<TaskItemType> = ({ description, isDone }) => {
         <Check width={CHECK_ICON_SIZE} height={CHECK_ICON_SIZE} />
       </Button>
       <Input value={inputValue} isDone={isDoneTask} setValue={setInputValue} />
-      <Button className="ml-5" onClick={() => {}}>
+      <Button className="ml-5" onClick={() => deleteTaskItem(id)}>
         <Trash width={TRASH_ICON_SIZE} height={TRASH_ICON_SIZE} />
       </Button>
     </div>

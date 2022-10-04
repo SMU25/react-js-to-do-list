@@ -1,7 +1,7 @@
 export interface TaskItemType {
-  id: number;
+  id: string;
   description: string;
   isDone?: boolean;
 }
 
-export type ClearInput = (value) => void;
+export type VoidFunctionWithValue = (value) => void;

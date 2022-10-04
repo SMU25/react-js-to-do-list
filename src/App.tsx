@@ -1,25 +1,41 @@
-import React from "react";
+import React, { useState, useEffect, useCallback, createContext } from "react";
 import Header from "src/components/Header";
 import TasksList from "src/components/TasksList";
 import AddTask from "src/components/AddTask";
 import "./styles.css";
+import { TaskItemType } from "./types/types";
 
-//mocks
-const ITEMS = [
-  { id: 1, description: "test", isDone: true },
-  { id: 2, description: "test2", isDone: false },
-  { id: 3, description: "test3", isDone: true },
-  { id: 4, description: "test4", isDone: false },
-];
+export const AppContext = createContext(null);
+
+const TO_DO_LIST_ITEMS_KEY = "TO_DO_LIST_ITEMS";
+const TO_DO_LIST_ITEMS = JSON.parse(localStorage.getItem(TO_DO_LIST_ITEMS_KEY));
 
 function App() {
+  const [tasksList, setTasksList] = useState<TaskItemType[]>(TO_DO_LIST_ITEMS);
+  const addTaskItem = useCallback(
+    (value: TaskItemType) => setTasksList((prev) => [...prev, value]),
+    []
+  );
+
+  const deleteTaskItem = useCallback(
+    (currentId: string) =>
+      setTasksList((prev) => prev.filter(({ id }) => id !== currentId)),
+    []
+  );
+
+  useEffect(() => {
+    localStorage.setItem(TO_DO_LIST_ITEMS_KEY, JSON.stringify(tasksList));
+  }, [tasksList]);
+
   return (
     <div className="App">
-      <Header />
-      <div className="bg-cyan-800 py-10">
-        <TasksList tasksList={ITEMS} />
-        <AddTask />
-      </div>
+      <AppContext.Provider value={deleteTaskItem}>
+        <Header />
+        <div className="py-10">
+          <AddTask addTaskItem={addTaskItem} />
+          <TasksList tasksList={tasksList} />
+        </div>
+      </AppContext.Provider>
     </div>
   );
 }

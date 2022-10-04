@@ -1,29 +1,45 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback, FC } from "react";
 import Input from "src/components/Input";
 import Button from "src/components/Button";
+import { onKeyDown } from "src/utils/onKeyDown";
+import { TaskItemType, VoidFunctionWithValue } from "src/types/types";
 import { ReactComponent as Plus } from "src/assets/plus.svg";
 
-const KEY_ENTER = "Enter";
 const PLUS_ICON_SIZE = 50;
 
-const AddTask = () => {
+const LABEL_TEXT = "Add a new task";
+
+interface Props {
+  addTaskItem: VoidFunctionWithValue;
+}
+
+const AddTask: FC<Props> = ({ addTaskItem }) => {
   const [value, setValue] = useState("");
 
-  const clearInput = useCallback(({ key }) => {
-    if (key.includes(KEY_ENTER)) setValue("");
-  }, []);
+  const createdTaskItem: TaskItemType = {
+    id: String(new Date().getTime()),
+    isDone: false,
+    description: value,
+  };
+
+  const updateTasksList = useCallback(() => {
+    addTaskItem(createdTaskItem);
+    setValue("");
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [value]);
 
   return (
-    <div className="flex max-w-2xl w-full mx-auto bg-slate-500 mt-14 p-4 rounded-2xl">
+    <div className="flex items-center max-w-2xl w-full mx-auto bg-slate-500 mt-5 p-4 rounded-2xl">
       <Input
+        labelText={LABEL_TEXT}
         value={value}
         className="text-3xl"
         setValue={setValue}
-        onKeyDown={clearInput}
+        onKeyDown={({ key }) => onKeyDown(updateTasksList, key)}
       />
       <Button
         className="bg-white rounded-full active:bg-gray-300"
-        onClick={clearInput}
+        onClick={updateTasksList}
         isDisabled={!value}
       >
         <Plus width={PLUS_ICON_SIZE} height={PLUS_ICON_SIZE} />

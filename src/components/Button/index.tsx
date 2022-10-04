@@ -1,10 +1,9 @@
 import React, { FC, ReactNode } from "react";
 import cn from "classnames";
-import { ClearInput } from "src/types/types";
 
 interface Props {
   className?: string;
-  onClick?: VoidFunction | ClearInput;
+  onClick?: VoidFunction;
   children?: ReactNode | string;
   isDisabled?: boolean;
 }
