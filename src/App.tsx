@@ -4,7 +4,7 @@ import TasksList from "src/components/TasksList";
 import AddTask from "src/components/AddTask";
 import "./styles.css";
 import { TaskItemType } from "./types/types";
-//
+
 export const AppContext = createContext(null);
 
 const TO_DO_LIST_ITEMS_KEY = "TO_DO_LIST_ITEMS";
