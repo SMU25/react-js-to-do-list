@@ -29,8 +29,10 @@ const AddTask: FC<Props> = ({ addTaskItem }) => {
   }, [value]);
 
   const onKeyEnter = useCallback(
-    ({ key }) => onKeyDown(updateTasksList, key),
-    [updateTasksList]
+    ({ key }) => {
+      if (value.length) onKeyDown(updateTasksList, key);
+    },
+    [updateTasksList, value]
   );
 
   return (

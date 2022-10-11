@@ -8,6 +8,7 @@ interface Props extends Pick<TaskItemType, "isDone"> {
   value: string;
   setValue: (value) => void;
   isDone?: boolean;
+  disabled?: boolean;
   onBlur?: VoidFunction;
   onKeyDown?: VoidFunction | VoidFunctionWithValue;
 }
@@ -20,6 +21,7 @@ const Input: FC<Props> = ({
   isDone,
   onBlur,
   onKeyDown,
+  disabled,
   ...props
 }) => {
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -46,6 +48,7 @@ const Input: FC<Props> = ({
         onChange={setInputValue}
         onBlur={onBlur}
         onKeyDown={onKeyDown}
+        disabled={disabled}
         {...props}
       />
     </div>
