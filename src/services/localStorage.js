@@ -1,4 +1,4 @@
-import { TO_DO_LIST_ITEMS_KEY } from "src/constants/localStorageKeys";
+import { TO_DO_LIST_ITEMS_KEY } from "src/constants/localStorage";
 
 const TO_DO_LIST_ITEMS_STRINGIFY = localStorage.getItem(TO_DO_LIST_ITEMS_KEY);
 

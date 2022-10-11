@@ -2,12 +2,9 @@ import React, { useState, useEffect, useCallback, createContext } from "react";
 import Header from "src/components/Header";
 import TasksList from "src/components/TasksList";
 import AddTask from "src/components/AddTask";
-import { TO_DO_LIST_ITEMS_KEY } from "src/constants/localStorageKeys";
+import { TO_DO_LIST_ITEMS_KEY } from "src/constants/localStorage";
 import "./styles.css";
-import {
-  getItemLocalStorage,
-  setItemLocalStorage,
-} from "./services/localStorage";
+import { getItemLocalStorage } from "./services/localStorage";
 import { TaskItemType } from "./types/types";
 
 export const AppContext = createContext(null);
@@ -54,7 +51,7 @@ function App() {
   );
 
   useEffect(() => {
-    setItemLocalStorage(tasksList);
+    localStorage.setItem(TO_DO_LIST_ITEMS_KEY, JSON.stringify(tasksList));
   }, [tasksList]);
 
   return (
