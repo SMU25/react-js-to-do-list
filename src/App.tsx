@@ -2,21 +2,26 @@ import React, { useState, useEffect, useCallback, createContext } from "react";
 import Header from "src/components/Header";
 import TasksList from "src/components/TasksList";
 import AddTask from "src/components/AddTask";
+import { TO_DO_LIST_ITEMS_KEY } from "src/constants/localStorage";
 import "./styles.css";
+import { getItemLocalStorage } from "./services/localStorage";
 import { TaskItemType } from "./types/types";
 
 export const AppContext = createContext(null);
 
-const TO_DO_LIST_ITEMS_KEY = "TO_DO_LIST_ITEMS";
-
-const TO_DO_LIST_ITEMS = JSON.parse(localStorage.getItem(TO_DO_LIST_ITEMS_KEY));
-
 function App() {
-  const [tasksList, setTasksList] = useState<TaskItemType[]>(TO_DO_LIST_ITEMS);
+  const [tasksList, setTasksList] = useState<TaskItemType[]>(
+    getItemLocalStorage()
+  );
 
   const addTaskItem = useCallback(
-    (value: TaskItemType) => setTasksList((prev) => [...prev, value]),
-    []
+    (value: TaskItemType) => {
+      if (tasksList?.length) setTasksList((prev) => [...prev, value]);
+      else {
+        setTasksList([value]);
+      }
+    },
+    [tasksList]
   );
 
   const deleteTaskItem = useCallback(
