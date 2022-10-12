@@ -2,10 +2,12 @@ import React, { useState, useEffect, useCallback, createContext } from "react";
 import Header from "src/components/Header";
 import TasksList from "src/components/TasksList";
 import AddTask from "src/components/AddTask";
-import { TO_DO_LIST_ITEMS_KEY } from "src/constants/localStorage";
-import "./styles.css";
-import { getItemLocalStorage } from "./services/localStorage";
+import {
+  getItemLocalStorage,
+  setItemLocalStorage,
+} from "./services/localStorage";
 import { TaskItemType } from "./types/types";
+import "./styles.css";
 
 export const AppContext = createContext(null);
 
@@ -30,29 +32,23 @@ function App() {
     []
   );
 
-  const updateTaskItem = useCallback(
-    (currentId: string, value: string) => {
-      const currentTaskItem = tasksList.find(({ id }) => id === currentId);
-      currentTaskItem.description = value;
+  const updateTaskItem = useCallback((currentId: string, value: string) => {
+    setTasksList((prev) =>
+      prev.map((item) =>
+        item.id !== currentId ? item : { ...item, description: value }
+      )
+    );
+  }, []);
 
-      localStorage.setItem(TO_DO_LIST_ITEMS_KEY, JSON.stringify(tasksList));
-    },
-    [tasksList]
-  );
+  const checkTaskItem = useCallback((currentId: string) => {
+    setTasksList((prev) =>
+      prev.map((item) =>
+        item.id !== currentId ? item : { ...item, isDone: !item.isDone }
+      )
+    );
+  }, []);
 
-  const checkTaskItem = useCallback(
-    (currentId: string) => {
-      const currentTaskItem = tasksList.find(({ id }) => id === currentId);
-      currentTaskItem.isDone = !currentTaskItem.isDone;
-
-      localStorage.setItem(TO_DO_LIST_ITEMS_KEY, JSON.stringify(tasksList));
-    },
-    [tasksList]
-  );
-
-  useEffect(() => {
-    localStorage.setItem(TO_DO_LIST_ITEMS_KEY, JSON.stringify(tasksList));
-  }, [tasksList]);
+  useEffect(() => setItemLocalStorage(tasksList), [tasksList]);
 
   return (
     <div className="App">
