@@ -1,4 +1,4 @@
-Deploy: [React.JS Todo list](https://react-js-to-do-list.herokuapp.com/)
+Deployed: [React.JS Todo list](https://react-js-to-do-list.herokuapp.com/)
 
 # Getting Started with Create React App
 
