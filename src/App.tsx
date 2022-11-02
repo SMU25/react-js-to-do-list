@@ -2,10 +2,8 @@ import React, { useState, useEffect, useCallback, createContext } from "react";
 import Header from "src/components/Header";
 import TasksList from "src/components/TasksList";
 import AddTask from "src/components/AddTask";
-import {
-  getItemLocalStorage,
-  setItemLocalStorage,
-} from "./services/localStorage";
+import { getItemLocalStorage } from "src/utils/getItemLocalStorage";
+import { setItemLocalStorage } from "src/utils/setItemLocalStorage";
 import { TaskItemType } from "./types/types";
 import "./styles.css";
 
