@@ -3,7 +3,6 @@ import { format } from "date-fns";
 import { AppContext } from "src/App";
 import Input from "src/components/Input";
 import Button from "src/components/Button";
-import { onKeyDown } from "src/utils/onKeyDown";
 import { TaskItemType } from "src/types/types";
 import { ReactComponent as Done } from "src/assets/done.svg";
 import { ReactComponent as NotDone } from "src/assets/not-done.svg";
@@ -29,8 +28,8 @@ export const TaskItem: FC<TaskItemType> = ({ id, description, isDone }) => {
 
   const Check = isDoneTask ? Done : NotDone;
 
-  const onKeyEnter = useCallback(
-    ({ key }) => onKeyDown(() => updateTaskItem(id, inputValue), key),
+  const onKeyDown = useCallback(
+    () => updateTaskItem(id, inputValue),
     [id, inputValue, updateTaskItem]
   );
 
@@ -52,8 +51,7 @@ export const TaskItem: FC<TaskItemType> = ({ id, description, isDone }) => {
           value={inputValue}
           isDone={isDoneTask}
           setValue={setInputValue}
-          onBlur={() => updateTaskItem(id, inputValue)}
-          onKeyDown={onKeyEnter}
+          onKeyDown={onKeyDown}
         />
         <Button className="ml-5" onClick={() => deleteTaskItem(id)}>
           <Trash width={TRASH_ICON_SIZE} height={TRASH_ICON_SIZE} />
