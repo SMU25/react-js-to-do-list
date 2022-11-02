@@ -9,6 +9,8 @@ import "./styles.css";
 
 export const AppContext = createContext(null);
 
+const BANNER_TEXT = "All notes are saved automatically !";
+
 function App() {
   const [tasksList, setTasksList] = useState<TaskItemType[]>(
     getItemLocalStorage()
@@ -54,7 +56,12 @@ function App() {
         value={{ deleteTaskItem, updateTaskItem, checkTaskItem }}
       >
         <Header />
-        <div className="py-10">
+        <div className="flex justify-center items-center max-w-2xl bg-slate-700 mt-9 mx-auto p-7 border-2 border-slate-400 rounded-md">
+          <p className="text-emerald-600 text-2xl font-medium text-center">
+            {BANNER_TEXT}
+          </p>
+        </div>
+        <div className="pt-7 pb-10">
           <AddTask addTaskItem={addTaskItem} />
           <TasksList tasksList={tasksList} />
         </div>

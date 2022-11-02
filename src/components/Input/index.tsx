@@ -6,10 +6,9 @@ interface Props extends Pick<TaskItemType, "isDone"> {
   className?: string;
   labelText?: string;
   value: string;
-  setValue: (value) => void;
+  setValue: (value: string) => void;
   isDone?: boolean;
   disabled?: boolean;
-  onBlur?: VoidFunction;
   onKeyDown?: VoidFunction | VoidFunctionWithValue;
 }
 
@@ -19,13 +18,14 @@ const Input: FC<Props> = ({
   value,
   setValue,
   isDone,
-  onBlur,
   onKeyDown,
   disabled,
   ...props
 }) => {
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  const setInputValue = useCallback(({ target }) => setValue(target.value), []);
+  const setInputValue = useCallback(
+    ({ target }) => setValue(target.value),
+    [setValue]
+  );
 
   const shownLabel = !value && labelText;
 
@@ -46,7 +46,6 @@ const Input: FC<Props> = ({
         )}
         value={value}
         onChange={setInputValue}
-        onBlur={onBlur}
         onKeyDown={onKeyDown}
         disabled={disabled}
         {...props}

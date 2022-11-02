@@ -1,4 +1,5 @@
 import React, { useState, useCallback, FC } from "react";
+import cn from "classnames";
 import Input from "src/components/Input";
 import Button from "src/components/Button";
 import { onKeyDown } from "src/utils/onKeyDown";
@@ -7,7 +8,7 @@ import { ReactComponent as Plus } from "src/assets/plus.svg";
 
 const PLUS_ICON_SIZE = 50;
 
-const LABEL_TEXT = "Add a new task";
+const LABEL_TEXT = "Add a new task...";
 
 interface Props {
   addTaskItem: VoidFunctionWithValue;
@@ -45,7 +46,9 @@ const AddTask: FC<Props> = ({ addTaskItem }) => {
         onKeyDown={onKeyEnter}
       />
       <Button
-        className="bg-white rounded-full active:bg-gray-300"
+        className={cn("bg-white rounded-full active:bg-gray-300", {
+          "cursor-default": !value,
+        })}
         onClick={updateTasksList}
         isDisabled={!value}
       >
