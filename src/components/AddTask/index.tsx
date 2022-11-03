@@ -47,7 +47,7 @@ const AddTask: FC<Props> = ({ addTaskItem }) => {
       />
       <Button
         className={cn("bg-white rounded-full active:bg-gray-300", {
-          "cursor-default": !value,
+          "!cursor-default": !value,
         })}
         onClick={updateTasksList}
         isDisabled={!value}
