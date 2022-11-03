@@ -28,7 +28,7 @@ export const TaskItem: FC<TaskItemType> = ({ id, description, isDone }) => {
 
   const Check = isDoneTask ? Done : NotDone;
 
-  const onKeyDown = useCallback(
+  const onUpdateTaskItem = useCallback(
     () => updateTaskItem(id, inputValue),
     [id, inputValue, updateTaskItem]
   );
@@ -51,7 +51,7 @@ export const TaskItem: FC<TaskItemType> = ({ id, description, isDone }) => {
           value={inputValue}
           isDone={isDoneTask}
           setValue={setInputValue}
-          onKeyDown={onKeyDown}
+          onUpdate={onUpdateTaskItem}
         />
         <Button className="ml-5" onClick={() => deleteTaskItem(id)}>
           <Trash width={TRASH_ICON_SIZE} height={TRASH_ICON_SIZE} />
