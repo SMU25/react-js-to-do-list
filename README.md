@@ -1,4 +1,4 @@
-## Deployed: [React.JS Todo list](https://react-js-to-do-list-silk.vercel.app/)
+## Deployed: [React Todo list](https://react-js-to-do-list-silk.vercel.app/)
 
 # Getting Started with Create React App
 
